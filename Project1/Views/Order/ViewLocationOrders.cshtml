@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ModelLayer.ViewModels.OrderView>
+
+@{
+	ViewData["Title"] = "View Location Orders";
+}
+
+<h1>Orders</h1>
+<span>
+	<!-- Not Working
+	<a asp-controller="Order" asp-action="ViewLocation" asp-route-locationId=@(ViewContext.RouteData.Values["locationId"]) asp-route-sort="1" class="btn btn-secondary">Sort By Earliest</a>
+	<a asp-controller="Order" asp-action="ViewLocation" asp-route-locationId=@(ViewContext.RouteData.Values["locationId"]) asp-route-sort="2" class="btn btn-secondary">Sort By Latest</a>
+	<a asp-controller="Order" asp-action="ViewLocation" asp-route-locationId=@(ViewContext.RouteData.Values["locationId"]) asp-route-sort="3" class="btn btn-secondary">Sort By Cheapest</a>
+	<a asp-controller="Order" asp-action="ViewLocation" asp-route-locationId=@(ViewContext.RouteData.Values["locationId"]) asp-route-sort="4" class="btn btn-secondary">Sort By Costliest</a>
+	-->
+	<a href="/Order/ViewLocation/@(ViewContext.RouteData.Values["locationId"])?sort=1" class="btn btn-secondary">Sort By Earliest</a>
+	<a href="/Order/ViewLocation/@(ViewContext.RouteData.Values["locationId"])?sort=2" class="btn btn-secondary">Sort By Latest</a>
+	<a href="/Order/ViewLocation/@(ViewContext.RouteData.Values["locationId"])?sort=3" class="btn btn-secondary">Sort By Cheapest</a>
+	<a href="/Order/ViewLocation/@(ViewContext.RouteData.Values["locationId"])?sort=4" class="btn btn-secondary">Sort By Costliest</a>
+</span>
+<input type="button" class="btn btn-primary" id="right" value="Details" onclick="AssignButtonClicked();" />
+
+@if(ViewBag.Message != null)
+{
+	<script type="text/javascript">
+            window.onload = function ()
+			{
+                alert("@ViewBag.Message");
+			}
+	</script>
+}
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.OrderTime)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Address)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Price)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.OrderTime)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Address)
+				</td>
+				<td>
+					$@Html.DisplayFor(modelItem => item.Price)
+				</td>
+				<td>
+					<a asp-action="Details" asp-route-id="@item.OrderId" class="btn btn-warning">Details</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<a asp-controller="Location" asp-action="Select" asp-route-locationId=@(ViewContext.RouteData.Values["locationId"]) class="btn btn-warning">Menu</a>
+
+@section scripts {
+	<script>
+		function AssignButtonClicked()
+		{
+			alert("@ViewBag.Summary");
+		}
+	</script>
+}

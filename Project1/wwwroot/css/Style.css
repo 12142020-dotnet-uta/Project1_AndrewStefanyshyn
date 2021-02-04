@@ -1,0 +1,41 @@
+﻿*{
+    color: #d4d4d4;
+}
+
+.center {
+    text-align: center;
+}
+
+#yellow{
+    color: yellow;
+}
+
+#logo{
+    color: #ffffff;
+    font: 30px bold;
+}
+
+#right{
+    float:right;
+}
+
+h1, h4{
+    text-align: center;
+    color: #66bbff;
+}
+
+body{
+    background-color: #444444;
+}
+
+header, footer{
+    background-color: #000000;
+}
+
+a, a:hover{
+    color: yellow;
+}
+
+table{
+    border: 5px solid #dddddd;
+}

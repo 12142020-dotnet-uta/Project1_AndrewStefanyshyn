@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ModelLayer.ViewModels.ProductViewModel>
+
+@{
+	ViewData["Title"] = "Shop";
+}
+
+
+<h1>Shop</h1>
+<span>
+	<!-- TEMP --><a asp-controller="Customer" asp-action="Cart" class="btn btn-warning">View Cart</a>
+	<a asp-controller="Location" asp-action="Cancel" class="btn btn-danger">Cancel Order</a>
+	<a href='/Order/ViewLocation/@(ViewContext.RouteData.Values["locationId"])?sort=2' class="btn btn-secondary">Order History</a>
+</span>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Price)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Description)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Stock)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Price)
+				</td>
+				<td style="color:@Html.DisplayFor(modelItem => item.Description);">
+					@Html.DisplayFor(modelItem => item.Description)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Stock)
+				</td>
+				<td>
+					<input type="button" class="btn btn-primary" value="Buy" onclick="AssignButtonClicked(@item.Id, @item.Stock);" />
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+@section scripts {
+	<script>
+		function AssignButtonClicked(id, stock)
+		{
+			let num = Number(prompt("How Many?:"));
+			if (num <= 0)
+				return;
+			else if (num > stock)
+				alert("We only have " + stock + " in stock!");
+			else
+			{
+				let url = '@Url.Action("Add", "Location", new { productId = "__id__", quantity = "__quant__" })';
+				url = url.replace("__id__", id);
+				url = url.replace("__quant__", num);
+				window.location.href = url;
+			}
+		}
+	</script>
+}

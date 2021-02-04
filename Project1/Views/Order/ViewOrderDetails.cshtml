@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ModelLayer.ViewModels.OrderDetailView>
+
+@{
+	ViewData["Title"] = "View Order Details";
+}
+
+<h1>Order Details</h1>
+<span>
+	<!-- Not Working
+	<p> <a asp-controller="Order" asp-action="Details" asp-route-orderId=@(ViewContext.RouteData.Values["orderId"]) asp-route-sort="1">Sort By Cheapest</a> </p>
+	<p> <a asp-controller="Order" asp-action="Details" asp-route-orderId=@(ViewContext.RouteData.Values["orderId"]) asp-route-sort="2">Sort By Costliest</a> </p>
+	-->
+	<a href='/Order/Details/@(ViewContext.RouteData.Values["orderId"])?sort=1' class="btn btn-secondary">Sort By Cheapest</a>
+	<a href='/Order/Details/@(ViewContext.RouteData.Values["orderId"])?sort=2' class="btn btn-secondary">Sort By Costliest</a>
+</span>
+
+@if(ViewBag.Message != null)
+{
+	<script type="text/javascript">
+            window.onload = function ()
+			{
+                alert("@ViewBag.Message");
+			}
+	</script>
+}
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Quantity)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Price)
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.ProductName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Quantity)
+				</td>
+				<td>
+					$@Html.DisplayFor(modelItem => item.Price)
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

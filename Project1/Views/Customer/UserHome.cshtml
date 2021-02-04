@@ -1,0 +1,25 @@
+﻿@model ModelLayer.Models.Customer
+
+@{
+	ViewData["Title"] = "UserHome";
+}
+
+<h1>Welcome, @Html.DisplayFor(model => model.FName)</h1>
+
+@if(ViewBag.Message != null)
+{
+	<script type="text/javascript">
+            window.onload = function ()
+			{
+                alert("@ViewBag.Message");
+			}
+	</script>
+}
+
+<div class="center">
+	<h4>You are Logged In.</h4>
+	<a asp-controller="Location" asp-action="Display" class="btn btn-primary">Select a Store</a><br/>
+	<a asp-controller="Order" asp-action="ViewCustomer" class="btn btn-primary">View Order History</a><br />
+	<a asp-controller="Customer" asp-action="ViewUsers" class="btn btn-primary">View Registered Users List</a><br />
+	<a asp-controller="Customer" asp-action="Logout" class="btn btn-secondary">Logout</a><br />
+</div>
