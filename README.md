@@ -1,8 +1,8 @@
 # Project1_AndrewStefanyshyn
 This is a virtual store where users can register and purchase products.
 # Tech Stack
-Backend: C# DotNetCore MVC
-Frontend: Razor Html
+Backend: C# DotNetCore MVC 5.0
+Frontend: Razor Html 5
 Database: MS SQL Server
 # Installation
 Open Project1/Project1.sln in Visual Studio.
